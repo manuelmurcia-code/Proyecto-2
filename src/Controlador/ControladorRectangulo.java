@@ -44,5 +44,20 @@ public class ControladorRectangulo {
         return x >= minX && x <= maxX && y >= minY && y <= maxY;
         
     }
-    
+ 
+    public void escalar(double factor) 
+    {
+        
+        if (factor <= 0) throw new IllegalArgumentException("El factor debe ser mayor que 0");
+        Punto a = rect.getP1(), b = rect.getP2();
+        double cx = (a.getX() + b.getX()) / 2, cy = (a.getY() + b.getY()) / 2;
+        a.setX(cx + (a.getX() - cx) * factor); a.setY(cy + (a.getY() - cy) * factor);
+        b.setX(cx + (b.getX() - cx) * factor); b.setY(cy + (b.getY() - cy) * factor);
+        
+    }
+ 
+    public void mover(double dx, double dy) 
+    { 
+        rect.mover(dx, dy); 
+    }
 }
