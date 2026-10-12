@@ -8,6 +8,11 @@ package Modelo;
  *
  * @author Manue
  */
-public class FiguraGeometrica {
-    
+public abstract class FiguraGeometrica {
+ 
+    // Cada figura calcula su area de forma distinta
+    public abstract double calcularArea();
+ 
+    // Cada figura se mueve de forma distinta
+    public abstract void mover(double dx, double dy);
 }
