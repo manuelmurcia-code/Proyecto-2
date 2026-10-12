@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Controlador.ControladorRectangulo;
+import Modelo.Punto;
 /**
  *
  * @author Manue
@@ -11,7 +13,8 @@ package Vista;
 public class Vista_Rectangulo extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Vista_Rectangulo.class.getName());
-
+    
+    private ControladorRectangulo controlador = new ControladorRectangulo();
     /**
      * Creates new form Vista_Rectangulo
      */
@@ -51,7 +54,7 @@ public class Vista_Rectangulo extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new PanelDibujo(controlador);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestor de Figuras");
@@ -86,6 +89,7 @@ public class Vista_Rectangulo extends javax.swing.JFrame {
         Mover.addActionListener(this::MoverActionPerformed);
 
         Area.setText("Area");
+        Area.addActionListener(this::AreaActionPerformed);
 
         Crear.setText("Crear");
         Crear.addActionListener(this::CrearActionPerformed);
@@ -227,46 +231,137 @@ public class Vista_Rectangulo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void X2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_X2ActionPerformed
-.        // TODO add your handling code here:
+     
     }//GEN-LAST:event_X2ActionPerformed
 
     private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField12ActionPerformed
-        // TODO add your handling code here:
+        // TODO+ add your handling code here:
     }//GEN-LAST:event_jTextField12ActionPerformed
 
     private void CrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearActionPerformed
-        // TODO add your handling code here:
+         try 
+        {
+           double x1 = Double.parseDouble(X1.getText());
+           double y1 = Double.parseDouble(Y1.getText());
+           double x2 = Double.parseDouble(X2.getText());
+           double y2 = Double.parseDouble(Y2.getText());
+
+           controlador.crearRectangulo(x1, y1, x2, y2);
+           lblResultado.setText("Rectangulo creado");
+        } 
+        catch (NumberFormatException ex) 
+        {
+           lblResultado.setText("Escriba solo numeros validos");
+        }
     }//GEN-LAST:event_CrearActionPerformed
 
     private void Punto_DentroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Punto_DentroActionPerformed
-        // TODO add your handling code here:
+        if (!controlador.existeRectangulo()) 
+        {
+            lblResultado.setText("Primero debe crear el rectangulo");
+            return;
+        }
+        try 
+        {
+        
+            double px = Double.parseDouble(PX.getText());
+            double py = Double.parseDouble(PY.getText());
+               
+            ((PanelDibujo) panelDibujo).setPuntoPrueba(new Punto(px, py));
+            
+            if (controlador.puntoDentro(px, py)) {
+                lblResultado.setText("El punto SI esta dentro del rectangulo");
+            } else {
+                lblResultado.setText("El punto NO esta dentro del rectangulo");
+            }
+            } catch (NumberFormatException ex) {
+                lblResultado.setText("Escriba solo numeros validos");
+        }
     }//GEN-LAST:event_Punto_DentroActionPerformed
 
     private void EscalarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EscalarActionPerformed
-        // TODO add your handling code here:
+        if (!controlador.existeRectangulo()) 
+        {
+            lblResultado.setText("Primero debe crear el rectangulo");
+            return;
+        }
+        try 
+        {
+            double factor = Double.parseDouble(Tamaño.getText());
+            
+            if (factor <= 0) 
+            {
+                lblResultado.setText("El factor debe ser mayor que 0");
+            } 
+            else 
+            {
+                controlador.escalar(factor);
+                lblResultado.setText("Nueva area: " + controlador.calcularArea());
+            }
+        } 
+        catch (NumberFormatException ex) 
+        {
+            lblResultado.setText("Escriba solo numeros validos");
+        }
     }//GEN-LAST:event_EscalarActionPerformed
 
     private void MoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MoverActionPerformed
-        // TODO add your handling code here:
+   
+        if (!controlador.existeRectangulo()) 
+        {
+            lblResultado.setText("Primero debe crear el rectangulo");
+            return;
+        }
+        try 
+        {
+            double dx = Double.parseDouble(Dx.getText());
+            double dy = Double.parseDouble(Dy.getText());
+
+            controlador.mover(dx, dy);
+            lblResultado.setText("Rectangulo movido");
+        } 
+        catch (NumberFormatException ex) 
+        {
+            lblResultado.setText("Escriba solo numeros validos");
+        }
     }//GEN-LAST:event_MoverActionPerformed
+
+    private void AreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AreaActionPerformed
+        if (!controlador.existeRectangulo()) 
+        {
+            lblResultado.setText("Primero debe crear el rectangulo");
+        } 
+        else 
+        {
+            double area = controlador.calcularArea();
+            lblResultado.setText("El area es: " + area);
+        }
+    }//GEN-LAST:event_AreaActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) 
+    {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        try 
+        {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) 
+            {
+                if ("Nimbus".equals(info.getName())) 
+                {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+        } 
+        
+        catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex)
+        {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
