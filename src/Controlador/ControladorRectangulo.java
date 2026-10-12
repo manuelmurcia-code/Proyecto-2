@@ -28,3 +28,10 @@ public class ControladorRectangulo {
     { 
         return rect; 
     }
+ 
+    public double calcularArea() 
+    { 
+        return rect.calcularArea(); 
+    }
+ 
+}
