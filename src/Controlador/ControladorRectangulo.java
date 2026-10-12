@@ -34,4 +34,15 @@ public class ControladorRectangulo {
         return rect.calcularArea(); 
     }
  
+    public boolean puntoDentro(double x, double y) 
+    {
+        
+        double minX = Math.min(rect.getP1().getX(), rect.getP2().getX());
+        double maxX = Math.max(rect.getP1().getX(), rect.getP2().getX());
+        double minY = Math.min(rect.getP1().getY(), rect.getP2().getY());
+        double maxY = Math.max(rect.getP1().getY(), rect.getP2().getY());
+        return x >= minX && x <= maxX && y >= minY && y <= maxY;
+        
+    }
+    
 }
