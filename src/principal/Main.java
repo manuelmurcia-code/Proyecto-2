@@ -9,5 +9,8 @@ package principal;
  * @author Manue
  */
 public class Main {
-    
+    public static void main(String[] args) {
+        VistaRectangulo ventana = new VistaRectangulo();
+        ventana.setVisible(true);
+    }
 }
