@@ -4,6 +4,9 @@
  */
 package Controlador;
 
+import Modelo.Punto;
+import Modelo.Rectangulo;
+
 /**
  *
  * @author Manue

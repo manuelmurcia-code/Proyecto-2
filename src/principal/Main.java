@@ -4,13 +4,15 @@
  */
 package principal;
 
+import Vista.Vista_Rectangulo;
+
 /**
  *
  * @author Manue
  */
 public class Main {
     public static void main(String[] args) {
-        VistaRectangulo ventana = new VistaRectangulo();
+        Vista_Rectangulo ventana = new Vista_Rectangulo();
         ventana.setVisible(true);
     }
 }

@@ -9,8 +9,8 @@ package Modelo;
  * @author Manue
  */
 public class Rectangulo extends FiguraGeometrica {
-    private Punto p1; // un vertice
-    private Punto p2; // el vertice opuesto
+    private final Punto p1; // un vertice
+    private final Punto p2; // el vertice opuesto
  
     public Rectangulo(Punto p1, Punto p2) {
         this.p1 = p1;
